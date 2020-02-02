@@ -106,7 +106,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     let book;
     try {
-        book = await Book.findById(id);
+        book = await Book.findById(req.params.id);
         await book.remove();
         res.redirect('/books');
     } catch {
