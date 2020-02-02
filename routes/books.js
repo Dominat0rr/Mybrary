@@ -45,7 +45,9 @@ router.post('/', async (req, res) => {
         pageCount: req.body.pageCount,
         description: req.body.description
     });
-    saveCover(book, req.body.cover);
+    if (req.body.cover != null && req.body.cover !== '') {
+        saveCover(book, req.body.cover);
+    }
 
     try {
         const newBook = await book.save();
@@ -146,7 +148,7 @@ async function renderFormPage(res, book, form, hasError = false) {
         }
 
         res.render(`books/${form}`, params);
-    } catch(e) {
+    } catch {
         res.redirect('/books');
     }
 }
